@@ -86,6 +86,7 @@ loadButton.onclick = function() {
             const config = JSON.parse(event.target.result);
             robot.x = config.robotPosition.x;
             robot.y = config.robotPosition.y;
+			robot.startPos = {'x': config.robotPosition.x, 'y': config.robotPosition.y};
             robot.cells = config.cells;
             robot.walls = config.walls;
             robot.draw(); // Обновляем отображение после загрузки
