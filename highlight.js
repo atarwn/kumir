@@ -43,7 +43,8 @@ function updateHighlightWidth() {
 }
 
 function fixFirefox() {
-    return 'top:' + textarea.offsetTop + 'px;left:' + textarea.offsetLeft + 'px;height:' + getStyle(textarea, 'height');
+    const lineNumbersWidth = getLineNumbersWidth(); // Get the width of the line numbers
+    return 'top:' + textarea.offsetTop + 'px;height:' + getStyle(textarea, 'height');
 }
 
 function createDiv(fieldId) {
@@ -57,6 +58,12 @@ function createDiv(fieldId) {
     document.head.appendChild(sheet);
     
     return textarea.parentNode.appendChild(div);
+}
+
+// Функция для получения ширины номера строк
+function getLineNumbersWidth() {
+    const lineNumbersElement = document.querySelector('.line-numbers'); // Предполагается, что у вас есть элемент с классом .line-numbers
+    return lineNumbersElement ? lineNumbersElement.offsetWidth : 0; // Возвращаем ширину или 0, если элемент не найден
 }
 
 function getStyle(el, cssprop) {

@@ -60,11 +60,11 @@ textarea {
 
 .editor {
     grid-area: editor;
-    display: grid;
+    display: flex;
     /* grid-template-rows: 800px 200px; */
-    grid-template-columns: 30px;
+    grid-template-columns: min-content 100%;
     grid-template-areas: 
-    "line-numbers code"
+    "line-numbers"
 }
 
 .line-numbers {
