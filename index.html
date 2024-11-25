@@ -4,10 +4,10 @@
 <title>КуМир</title>
 <meta charset='UTF-8'>
 <meta name="viewport" content="width=device-width">
-<link rel='stylesheet' type='text/css' href='styles.css'>
-<script type='text/javascript' src='kumir.js'></script>
-<script type='text/javascript' src='robot.js'></script>
-<script type='text/javascript' src='highlight.js'></script>
+<link rel='stylesheet' type='text/css' href='/static/css/styles.css'>
+<script type='text/javascript' src='/static/js/kumir.js'></script>
+<script type='text/javascript' src='/static/js/robot.js'></script>
+<script type='text/javascript' src='/static/js/highlight.js'></script>
 </head>
 <body>
 	<div id="app">
@@ -21,12 +21,9 @@
 			<input type='button' value='Выполнить' id='button'>
 			<input type='button' value='Сохранить' id='saveButton'>
 			<input type='button' value='Загрузить' id='loadButton'>
-		</div>
-		<div class="messages">
 			<textarea id='output' disabled = 'true'></textarea>
 			<div id='error'></div>
 		</div>
-		
 		
 		<div class="canvas" id='robotBoard'>
 			<p>Редактирование поля:</p>
@@ -99,20 +96,28 @@ loadButton.onclick = function() {
 };
 </script>
 <script>
-function updateLineNumbers() {
-    const textarea = document.getElementById('input');
-    const lineNumbers = document.getElementById('lineNumbers');
-
-    // Разделяем текст на строки
-    const lines = textarea.value.split('\n');
-    
-    // Генерируем номера строк
-    lineNumbers.innerHTML = lines.map((_, index) => index + 1).join('<br>');
-}
-
-// Инициализация при загрузке страницы
-document.addEventListener('DOMContentLoaded', updateLineNumbers);
-
-</script>
+	function updateLineNumbers() {
+		const textarea = document.getElementById('input');
+		const lineNumbers = document.getElementById('lineNumbers');
+	
+		// Разделяем текст на строки
+		const lines = textarea.value.split('\n');
+		
+		// Генерируем номера строк
+		lineNumbers.innerHTML = lines.map((_, index) => index + 1).join('<br>');
+	}
+	
+	// Инициализация при загрузке страницы
+	document.addEventListener('DOMContentLoaded', function() {
+		const textarea = document.getElementById('input');
+		
+		// Обновляем номера строк при загрузке страницы
+		updateLineNumbers();
+		
+		// Добавляем обработчик события input для обновления номеров строк
+		textarea.addEventListener('input', updateLineNumbers);
+	});
+	</script>
+	
 </body>
 </html>
