@@ -233,12 +233,23 @@ robot.parseCommand = function (commands) {
     if (/\sиспользовать\s+Робот\s/.test(commands)) {
         commands = commands.replace(/\sиспользовать\s+Робот\s/g, '');
         commands.split('\n').forEach(function (command) {
-            //парсинг команд движения и закрашивания
-            command = command.replace(/\sвправо\s/g, ' robot.right(); ');
-            command = command.replace(/\sвлево\s/g, ' robot.left(); ');
-            command = command.replace(/\sвверх\s/g, ' robot.up(); ');
-            command = command.replace(/\sвниз\s/g, ' robot.down(); ');
+            // Обработка команд с количеством шагов
+            command = command.replace(/(вверх|вниз|влево|вправо)\s+(\d+)/g, function(match, direction, steps) {
+                let stepCount = parseInt(steps);
+                let moveCommands = '';
+                for (let i = 0; i < stepCount; i++) {
+                    if (direction === 'вверх') moveCommands += 'robot.up(); ';
+                    else if (direction === 'вниз') moveCommands += 'robot.down(); ';
+                    else if (direction === 'влево') moveCommands += 'robot.left(); ';
+                    else if (direction === 'вправо') moveCommands += 'robot.right(); ';
+                }
+                return moveCommands;
+            });
+            
+            // Остальная обработка команд
             command = command.replace(/\sзакрасить\s/g, ' robot.paint(); ');
+        }
+    }
 
             //Парсинг условий на наличе стен и закрашенность клетки
             command = command.replace(/\s(справа|слева|сверху|снизу)\s+(свободно|стена)/g, ' $1 ( $2 )');
