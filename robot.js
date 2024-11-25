@@ -249,7 +249,6 @@ robot.parseCommand = function (commands) {
             // Остальная обработка команд
             command = command.replace(/\sзакрасить\s/g, ' robot.paint(); ');
         }
-    }
 
             //Парсинг условий на наличе стен и закрашенность клетки
             command = command.replace(/\s(справа|слева|сверху|снизу)\s+(свободно|стена)/g, ' $1 ( $2 )');
