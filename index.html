@@ -12,13 +12,22 @@
 <body>
 	<div id="app">
 		<div class="editor">
-			<textarea id='input' spellcheck='false'>использовать Робот&#13;&#10;алг&#13;&#10;нач&#13;&#10;&#13;&#10;кон</textarea>
+			<div class="line-numbers" id="lineNumbers"></div>
+			<div class="code">
+				<textarea id='input' spellcheck='false'>использовать Робот&#13;&#10;алг&#13;&#10;нач&#13;&#10;&#13;&#10;кон</textarea>
+			</div>
+		</div>
+		<div class="controls">
+			<input type='button' value='Выполнить' id='button'>
+			<input type='button' value='Сохранить' id='saveButton'>
+			<input type='button' value='Загрузить' id='loadButton'>
 		</div>
 		<div class="messages">
-				<textarea id='output' disabled = 'true'></textarea>
-				<input type='button' value='Выполнить' id='button'>
-				<div id='error'></div>
+			<textarea id='output' disabled = 'true'></textarea>
+			<div id='error'></div>
 		</div>
+		
+		
 		<div class="canvas" id='robotBoard'>
 			<p>Редактирование поля:</p>
 			<p>Щелчок (тап) по клетке/полям: закрасить клетку/поле</p>
@@ -49,6 +58,61 @@
 		kumir.start(input.value);
 	}
 </script>
+<script>
+saveButton = document.getElementById('saveButton');
+loadButton = document.getElementById('loadButton');
 
+saveButton.onclick = function() {
+    const config = {
+        robotPosition: { x: robot.x, y: robot.y },
+        cells: robot.cells,
+        walls: robot.walls
+    };
+    const blob = new Blob([JSON.stringify(config)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'configuration.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+};
+
+loadButton.onclick = function() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = e => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = event => {
+            const config = JSON.parse(event.target.result);
+            robot.x = config.robotPosition.x;
+            robot.y = config.robotPosition.y;
+            robot.cells = config.cells;
+            robot.walls = config.walls;
+            robot.draw(); // Обновляем отображение после загрузки
+        };
+        reader.readAsText(file);
+    };
+    input.click();
+};
+</script>
+<script>
+function updateLineNumbers() {
+    const textarea = document.getElementById('input');
+    const lineNumbers = document.getElementById('lineNumbers');
+
+    // Разделяем текст на строки
+    const lines = textarea.value.split('\n');
+    
+    // Генерируем номера строк
+    lineNumbers.innerHTML = lines.map((_, index) => index + 1).join('<br>');
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', updateLineNumbers);
+
+</script>
 </body>
 </html>

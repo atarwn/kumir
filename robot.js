@@ -1,4 +1,5 @@
 const robot = {}
+
 //стартовые настройки
 robot.x = 0;
 robot.y = 0;
@@ -7,10 +8,16 @@ robot.canvas = document.createElement('canvas');
 robot.HCELLS = 12;
 robot.VCELLS = 12;
 robot.CELL_SIZE = 50;
-robot.WALL_SIZE = 6;
+robot.WALL_SIZE = 10;
 robot.cells = {};
 robot.walls = {};
 robot.startPos = {'x': 0, 'y': 0};
+
+robot.setFieldSize = function(hcells, vcells) {
+    this.HCELLS = hcells;
+    this.VCELLS = vcells;
+    this.create(robotBoard); // Пересоздаем поле с новыми размерами
+};
 
 class Cell {
     constructor(x, y) {
@@ -55,7 +62,7 @@ robot.create = function (container) {
     robot.canvas.height = (robot.CELL_SIZE + robot.WALL_SIZE) * robot.VCELLS + robot.WALL_SIZE;
     container.appendChild(robot.canvas);
 
-    robot.img.src = 'robot.png';
+    robot.img.src = 'robot.svg';
     robot.img.onload = function () {
         robot.draw();
     }
@@ -88,7 +95,7 @@ robot.draw = function (move) {
 
     for (let i in robot.cells) {
         let cell = robot.cells[i];
-        ctx.fillStyle = (cell.isFail) ? '#F44336' : (cell.isFill) ? '#9E9E9E' : '#8BC34A';
+        ctx.fillStyle = (cell.isFail) ? '#F44336' : (cell.isFill) ? '#77767b' : '#8BC34A';
         ctx.fillRect(cell.left, cell.top, robot.CELL_SIZE, robot.CELL_SIZE);
     }
 
@@ -96,7 +103,7 @@ robot.draw = function (move) {
 
     for (let i in robot.walls) {
         let wall = robot.walls[i];
-        ctx.fillStyle = (wall.isActive || wall.isHover) ? '#FFD54F' : '#4CAF50';
+        ctx.fillStyle = (wall.isActive || wall.isHover) ? '#f5c211' : '#4CAF50';
         ctx.fillRect(wall.left, wall.top, wall.width, wall.height);
     }
 
