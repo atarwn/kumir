@@ -228,13 +228,14 @@ robot.parseCommand = function (commands) {
     robot.clean();
     robot.x = robot.startPos.x;
     robot.y = robot.startPos.y;
-    robot.moveRobot(0,0);
+    robot.moveRobot(0, 0);
     let jsCommand = '';
+
     if (/\sиспользовать\s+Робот\s/.test(commands)) {
         commands = commands.replace(/\sиспользовать\s+Робот\s/g, '');
         commands.split('\n').forEach(function (command) {
             // Обработка команд с количеством шагов
-            command = command.replace(/(вверх|вниз|влево|вправо)\s+(\d+)/g, function(match, direction, steps) {
+            command = command.replace(/(вверх|вниз|влево|вправо)\s+(\d+)/g, function (match, direction, steps) {
                 let stepCount = parseInt(steps);
                 let moveCommands = '';
                 for (let i = 0; i < stepCount; i++) {
@@ -245,12 +246,11 @@ robot.parseCommand = function (commands) {
                 }
                 return moveCommands;
             });
-            
+
             // Остальная обработка команд
             command = command.replace(/\sзакрасить\s/g, ' robot.paint(); ');
-        }
-
-            //Парсинг условий на наличе стен и закрашенность клетки
+            
+            // Парсинг условий на наличие стен и закрашенность клетки
             command = command.replace(/\s(справа|слева|сверху|снизу)\s+(свободно|стена)/g, ' $1 ( $2 )');
             command = command.replace(/\s(справа|слева|сверху|снизу)\s+не\s+(свободно|стена)/g, ' $1 (! $2 )');
             command = command.replace(/\s(клетка)\s+(закрашена|чистая)/g, ' $1 ( $2 )');
@@ -264,8 +264,9 @@ robot.parseCommand = function (commands) {
             command = command.replace(/\sснизу\s/g, ' robot.onBottom');
 
             jsCommand += command + '\n';
-        });
+        }); // Закрывающая фигурная скобка для forEach
         commands = jsCommand;
     }
-    return commands;
+    
+    return commands; // Закрывающая фигурная скобка для функции parseCommand
 }
