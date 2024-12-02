@@ -9,9 +9,26 @@ function startHighlight(fieldId) {
     
     textarea.oninput = handleInput;
     textarea.onscroll = handleScroll;
-    window.onresize = updateHighlightWidth; // Add this line to handle window resize
+
+    // Используем ResizeObserver для отслеживания изменений размера textarea
+    const resizeObserver = new ResizeObserver(() => {
+        updateHighlightWidth();
+        updateHighlightHeight();
+    });
+    resizeObserver.observe(textarea); // Начинаем наблюдение за textarea
+
     handleInput();
 }
+
+function updateHighlightWidth() {
+    highlight.style.width = getStyle(textarea, 'width'); // Обновляем ширину
+}
+
+function updateHighlightHeight() {
+    highlight.style.height = getStyle(textarea, 'height'); // Обновляем высоту
+}
+
+
 
 function applyhighlight(text) {
     var keyword = /(^|\s|\()(или|и|не|да|нет|нач|кон|нц|кц|алг|ввод|вывод|если|то|иначе|при|пока|все|использовать|для|от|до|шаг)($|\s|\))/g;
@@ -36,10 +53,6 @@ function handleInput() {
 function handleScroll() {
     highlight.scrollTop = textarea.scrollTop;
     highlight.scrollLeft = textarea.scrollLeft;
-}
-
-function updateHighlightWidth() {
-    highlight.style.width = getStyle(textarea, 'width'); // Update the width of the highlight div
 }
 
 function fixFirefox() {

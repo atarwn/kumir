@@ -1,0 +1,119 @@
+/* styles.css */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#app {
+    display: flex;
+    /* flex-direction: column; */
+    padding: 10px;
+    justify-content: center;
+    width: fit-content;
+}
+
+.editor {
+    margin-bottom: 15px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    resize: vertical;
+    font-family: monospace;
+    font-size: 1.6em;
+    line-height: 1.5;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: #999;
+}
+
+input[type="button"] {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 5px 5px 0 0;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+}
+
+input[type="button"]:hover {
+    background-color: #2980b9;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.controls textarea {
+    flex-grow: 1;
+    height: 100px;
+    margin-top: 10px;
+}
+
+#robotBoard {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+#robotBoard canvas {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #333;
+}
+
+#error {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Mobile-specific styles */
+.mobile-app {
+    flex-direction: column;
+}
+
+.mobile-app .editor textarea {
+    height: 100px;
+}
+
+.mobile-app .controls {
+    flex-direction: column;
+}
+
+.mobile-app input[type="button"] {
+    width: 100%;
+    margin: 5px 0;
+}
+
+#inputHighlightDiv {
+    line-height: 1.5; /* Соответствует textarea */
+    z-index: 1; /* Располагается над другими элементами */
+}
+
+#inputHighlightDiv mark {
+    background-color: transparent; /* Убираем стандартный фон <mark> */
+}
+

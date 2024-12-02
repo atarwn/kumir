@@ -254,6 +254,26 @@ robot.parseCommand = function (commands) {
                 return moveCommands;
             });
 
+            // Обработка движений с использованием переменных
+            command = command.replace(/(вверх|вниз|влево|вправо)\s+(\w+)/g, function (match, direction, variable) {
+                if (!(variable in robot.variables)) {
+                    throw new Error(`Переменная ${variable} не определена`);
+                }
+                let stepCount = parseInt(robot.variables[variable]);
+                if (isNaN(stepCount)) {
+                    throw new Error(`Переменная ${variable} должна быть числом`);
+                }
+                let moveCommands = '';
+                for (let i = 0; i < stepCount; i++) {
+                    if (direction === 'вверх') moveCommands += 'robot.up(); ';
+                    else if (direction === 'вниз') moveCommands += 'robot.down(); ';
+                    else if (direction === 'влево') moveCommands += 'robot.left(); ';
+                    else if (direction === 'вправо') moveCommands += 'robot.right(); ';
+                }
+                return moveCommands;
+            });
+
+
             // Остальная обработка команд
             command = command.replace(/\sзакрасить\s/g, ' robot.paint(); ');
             

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Документация по командам робота</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .command {
+            margin: 10px 0;
+            padding: 10px;
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+        }
+        code {
+            background: #e1e1e1;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 90%;
+        }
+        .codeblock {
+            background: #000;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 1.6em;
+            resize: none;
+            border: 3px outset #aaa;
+            color: #0f0
+        }
+        .example {
+            background: #dfe6e9;
+            padding: 10px;
+            border-left: 4px solid #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h2>Документация по командам для веб-интерпретатора КуМир-а</h2>
+    <h3>Общие принципы работы</h3>
+    <p>Интерпретатор реализует трансляцию программ на языке КуМир в JavaScript и выполняет их. Включены возможности для взаимодействия с исполнителем <strong>Робот</strong> и работы с базовыми элементами языка.</p>
+    <hr>
+    <h3>Общие команды языка КуМир</h3>
+    <h4>Объявление переменных</h4>
+    <ul>
+    <li><strong>цел</strong> <code>&lt;имя переменной&gt;</code>  </li>
+    <li><strong>вещ</strong> <code>&lt;имя переменной&gt;</code>  </li>
+    <li><strong>лог</strong> <code>&lt;имя переменной&gt;</code>  </li>
+    <li><strong>сим</strong> <code>&lt;имя переменной&gt;</code>  </li>
+    <li><strong>лит</strong> <code>&lt;имя переменной&gt;</code></li>
+    </ul>
+    <p>Создает переменную соответствующего типа.</p>
+    <hr>
+    <h4>Ввод данных</h4>
+    <ul>
+    <li><strong>ввод</strong> <code>&lt;переменная&gt;</code></li>
+    </ul>
+    <p>Выводит окно ввода, результат сохраняется в указанной переменной.</p>
+    <hr>
+    <h4>Вывод данных</h4>
+    <ul>
+    <li><strong>вывод</strong> <code>&lt;выражение&gt;</code></li>
+    </ul>
+    <p>Выводит результат выражения в консоль.</p>
+    <hr>
+    <h4>Логические операции</h4>
+    <ul>
+    <li><strong>и</strong>, <strong>или</strong>: логическое &quot;И&quot; и &quot;ИЛИ&quot;.  </li>
+    <li><strong>не</strong> <code>&lt;выражение&gt;</code>: логическое отрицание.</li>
+    </ul>
+    <hr>
+    <h4>Условные конструкции</h4>
+    <ul>
+    <li><strong>если</strong> <code>&lt;условие&gt;</code> <strong>то</strong> <code>&lt;команды&gt;</code> <strong>все</strong><br>Выполняет команды, если условие истинно.  </li>
+    <li><strong>иначе</strong> <code>&lt;команды&gt;</code><br>Выполняется при ложном условии.</li>
+    </ul>
+    <hr>
+    <h4>Циклы</h4>
+    <ul>
+    <li><strong>нц</strong> <strong>для</strong> <code>&lt;переменная&gt;</code> <strong>от</strong> <code>&lt;начало&gt;</code> <strong>до</strong> <code>&lt;конец&gt;</code> <strong>шаг</strong> <code>&lt;шаг&gt;</code> <strong>нач</strong> <code>&lt;команды&gt;</code> <strong>кц</strong><br>Выполняет команды с заданным шагом.  </li>
+    <li><strong>нц</strong> <strong>пока</strong> <code>&lt;условие&gt;</code> <strong>нач</strong> <code>&lt;команды&gt;</code> <strong>кц</strong><br>Цикл с условием на входе.  </li>
+    <li><strong>нц</strong> <code>&lt;команды&gt;</code> <strong>кц</strong> <strong>при</strong> <code>&lt;условие&gt;</code><br>Цикл с условием на выходе.</li>
+    </ul>
+    <hr>
+    <h3>Команды исполнителя <strong>Робот</strong></h3>
+    <h4>Подключение</h4>
+    <ul>
+    <li><strong>использовать Робот</strong><br>Подключает исполнителя Робот для выполнения программ.</li>
+    </ul>
+    <hr>
+    <h4>Основные команды движения</h4>
+    <ul>
+    <li><strong>вверх <code>&lt;число&gt;</code></strong>  </li>
+    <li><strong>вниз <code>&lt;число&gt;</code></strong>  </li>
+    <li><strong>влево <code>&lt;число&gt;</code></strong>  </li>
+    <li><strong>вправо <code>&lt;число&gt;</code></strong></li>
+    </ul>
+    <p>Перемещают Робота на указанное число клеток.  </p>
+    <hr>
+    <h4>Закрашивание клетки</h4>
+    <ul>
+    <li><strong>закрасить</strong><br>Закрашивает текущую клетку.</li>
+    </ul>
+    <hr>
+    <h4>Проверки</h4>
+    <ul>
+    <li><p><strong>закрашена</strong> <br>Проверяет, закрашена ли текущая клетка.  </p>
+    </li>
+    <li><p><strong>&lt;справа|слева|сверху|снизу&gt; &lt;свободно|стена&gt;</strong><br>Проверяет наличие стены в указанном направлении.</p>
+    </li>
+    </ul>
+    <hr>
+    <h4>Управление полем</h4>
+    <ul>
+    <li><strong>очистить</strong><br>Сбрасывает закрашенные клетки и состояние Робота.</li>
+    </ul>
+    <hr>
+    <h4>Пример программы для Робота</h4>
+    <textarea class="codeblock" cols="30" rows="20" readonly>использовать Робот
+алг
+нач
+цел ШАГИ
+цел ШАГ
+ввод ШАГИ
+ШАГ:=1
+
+нц для i от 1 до ШАГИ шаг ШАГ
+  если справа свободно
+  то
+    закрасить
+    нц для _ от 1 до ШАГ
+      вправо 1
+    кц
+  иначе
+    вывод "Столкновение!"
+  все
+кц
+кон</textarea>
+    <p>Эта программа заставляет Робота двигаться вправо на заданное количество шагов, закрашивая незакрашенные клетки.</p>
+    
+</body>
+</html>
