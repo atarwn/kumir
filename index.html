@@ -4,31 +4,34 @@
 <title>КуМир</title>
 <meta charset='UTF-8'>
 <meta name="viewport" content="width=device-width">
-<link rel='stylesheet' type='text/css' href='static/css/styles.css'>
+<link rel='stylesheet' type='text/css' href='static/css/style-v1.css'>
 <script type='text/javascript' src='static/js/kumir.js'></script>
 <script type='text/javascript' src='static/js/robot.js'></script>
 <script type='text/javascript' src='static/js/highlight.js'></script>
 </head>
 <body>
 	<div id="app">
-		<div class="editor">
-			<div class="line-numbers" id="lineNumbers"></div>
-			<div class="code">
-				<textarea id='input' spellcheck='false'>использовать Робот&#13;&#10;алг&#13;&#10;нач&#13;&#10;&#13;&#10;кон</textarea>
+		<div>
+			<div class="editor">
+				<!-- <div class="line-numbers" id="lineNumbers"></div> -->
+				<div class="code">
+					<textarea id='input' spellcheck='false'>использовать Робот&#13;&#10;алг&#13;&#10;нач&#13;&#10;&#13;&#10;кон</textarea>
+				</div>
 			</div>
-		</div>
-		<div class="controls">
-			<input type='button' value='Выполнить' id='button'>
-			<input type='button' value='Сохранить' id='saveButton'>
-			<input type='button' value='Загрузить' id='loadButton'>
-			<textarea id='output' disabled = 'true'></textarea>
-			<div id='error'></div>
+			<div class="controls">
+				<input type='button' value='Выполнить' id='button'>
+				<input type='button' value='Сохранить' id='saveButton'>
+				<input type='button' value='Загрузить' id='loadButton'>
+				<textarea id='output' disabled = 'true'></textarea>
+				<div id='error'></div>
+			</div>
 		</div>
 		
 		<div class="canvas" id='robotBoard'>
 			<p>Редактирование поля:</p>
 			<p>Щелчок (тап) по клетке/полям: закрасить клетку/поле</p>
 			<p>Двойной щелчок (длинный тап) по полю: установка робота</p>
+			<p><a href="doc.html">Все команды, которые поддерживаются веб-интерпретатором тут.</a></p>
 			<br>
 		</div>	
 	</div>
